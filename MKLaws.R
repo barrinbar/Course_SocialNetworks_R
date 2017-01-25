@@ -92,6 +92,8 @@ parties.graph <- contract.vertices(g,
 
 V(parties.graph)$label <- V(parties.graph)$Party
 
+E(parties.graph)$weight <- E(parties.graph)$count
+
 parties.graph <- simplify(graph=parties.graph, remove.multiple = TRUE, remove.loops = FALSE, edge.attr.comb = list(weight="sum", count ="sum", "ignore"))
 
 vcount(parties.graph)
@@ -109,6 +111,10 @@ intraparty
 intraparty / total * 100
 interparty
 interparty / total * 100
+
+# Sum the amount of laws each partyis involved in
+strength(parties.graph, weights = E(parties.graph)$count)
+
 
 ####################
 # Q7
